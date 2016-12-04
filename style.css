@@ -1,0 +1,29 @@
+#fibonacci > rect {
+    stroke: white;
+    stroke-width: 1;
+}
+
+#fibonacci > rect:nth-child(4n + 1) {
+    fill: #ff4444;
+}
+
+#fibonacci > rect:nth-child(4n + 2) {
+    fill: #44bb44;
+}
+
+#fibonacci > rect:nth-child(4n + 3) {
+    fill: #4444bb;
+}
+
+#fibonacci > rect:nth-child(4n + 4) {
+    fill: #ffa500;
+}
+
+li, pre {
+    font-family: 'Courier New';
+    font-size: 12px;
+}
+
+p {
+    font-family: Arial, sans-serif;
+}

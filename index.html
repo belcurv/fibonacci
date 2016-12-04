@@ -3,27 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-
-    <style>
-        
-        svg {
-            border: 1px solid black;
-        }
-        
-        li, pre {
-            font-family: 'Courier New';
-            font-size: 12px;
-        }
-        
-        p {
-            font-family: Arial, sans-serif;
-        }
-        
-    </style>
+    
+    <link rel=stylesheet href="style.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
 
 </head>
 
-<body>
+<body ng-app="fibonacci" ng-controller="fibonacciCtrl">
 
     <p>Each rect's width and height are always the same and must be positive numbers.</p>
     <p>The x and y coordinates vary and are funky. What's the rhyme/reason? Depends on direction.  Assuming counter-clockwise assembly:</p>
@@ -34,31 +22,31 @@
         <li><strong>RIGHT:</strong> x: previous DOWN box's 'x' value + previous DOWN box's width , y: previous LEFT box's 'y' value</li>
     </ul>
     
-    <p>Fibonacci sequence:</p>
-    <pre>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584</pre>
+    <p>Fibonacci sequence:</p>    
+    <pre>{{ generateSeries(19) }}</pre>
     
     <p>Play around with the viewbox paramter's dimensions to "zoom" in and out.</p>
 
-    <svg width="95%" viewbox="-200 -200 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <svg id="fibonacci" width="95%" viewbox="-200 -200 1200 800" xmlns="http://www.w3.org/2000/svg">
 
-        <rect stroke="white" fill="#ff4444" x="0"     y="0"    width="1"    height="1"   />   <!-- down -->
-        <rect stroke="white" fill="#44bb44" x="0"     y="1"    width="1"    height="1"   />   <!-- right  -->
-        <rect stroke="white" fill="#4444bb" x="0"     y="-2"   width="2"    height="2"   />   <!-- up -->
-        <rect stroke="white" fill="#ffa500" x="-3"    y="-2"   width="3"    height="3"   />   <!-- left -->
-        <rect stroke="white" fill="#ff4444" x="-3"    y="1"    width="5"    height="5"   />   <!-- down -->
-        <rect stroke="white" fill="#44bb44" x="2"     y="-2"   width="8"    height="8"   />   <!-- right -->
-        <rect stroke="white" fill="#4444bb" x="-3"    y="-15"  width="13"   height="13"  />   <!-- up -->
-        <rect stroke="white" fill="#ffa500" x="-24"   y="-15"  width="21"   height="21"  />   <!-- left -->
-        <rect stroke="white" fill="#ff4444" x="-24"   y="6"    width="34"   height="34"  />   <!-- down -->
-        <rect stroke="white" fill="#44bb44" x="10"    y="-15"  width="55"   height="55"  />   <!-- right -->
-        <rect stroke="white" fill="#4444bb" x="-24"   y="-104" width="89"   height="89"  />   <!-- up -->
-        <rect stroke="white" fill="#ffa500" x="-168"  y="-104" width="144"  height="144" />   <!-- left -->
-        <rect stroke="white" fill="#ff4444" x="-168"  y="40"   width="233"  height="233" />   <!-- down -->
-        <rect stroke="white" fill="#44bb44" x="65"    y="-104" width="377"  height="377" />   <!-- right -->
-        <rect stroke="white" fill="#4444bb" x="-168"  y="-714" width="610"  height="610" />   <!-- up -->
-        <rect stroke="white" fill="#ffa500" x="-1155" y="-714" width="987"  height="987" />   <!-- left -->
-        <rect stroke="white" fill="#ff4444" x="-1155" y="273"  width="1597" height="1597" />  <!-- down -->
-        <rect stroke="white" fill="#44bb44" x="442"   y="-714" width="2584" height="2584" />  <!-- right -->
+        <rect x="0"     y="0"    width="1"    height="1"   />   <!-- down -->
+        <rect x="0"     y="1"    width="1"    height="1"   />   <!-- right  -->
+        <rect x="0"     y="-2"   width="2"    height="2"   />   <!-- up -->
+        <rect x="-3"    y="-2"   width="3"    height="3"   />   <!-- left -->
+        <rect x="-3"    y="1"    width="5"    height="5"   />   <!-- down -->
+        <rect x="2"     y="-2"   width="8"    height="8"   />   <!-- right -->
+        <rect x="-3"    y="-15"  width="13"   height="13"  />   <!-- up -->
+        <rect x="-24"   y="-15"  width="21"   height="21"  />   <!-- left -->
+        <rect x="-24"   y="6"    width="34"   height="34"  />   <!-- down -->
+        <rect x="10"    y="-15"  width="55"   height="55"  />   <!-- right -->
+        <rect x="-24"   y="-104" width="89"   height="89"  />   <!-- up -->
+        <rect x="-168"  y="-104" width="144"  height="144" />   <!-- left -->
+        <rect x="-168"  y="40"   width="233"  height="233" />   <!-- down -->
+        <rect x="65"    y="-104" width="377"  height="377" />   <!-- right -->
+        <rect x="-168"  y="-714" width="610"  height="610" />   <!-- up -->
+        <rect x="-1155" y="-714" width="987"  height="987" />   <!-- left -->
+        <rect x="-1155" y="273"  width="1597" height="1597" />  <!-- down -->
+        <rect x="442"   y="-714" width="2584" height="2584" />  <!-- right -->
 
     </svg>
 
