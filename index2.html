@@ -14,18 +14,18 @@
 <body ng-app="fibonacci" ng-controller="fibonacciCtrl">
 
     <p>Each rect's width and height are always the same and must be positive numbers.</p>
-    <p>The x and y coordinates vary and are funky. What's the rhyme/reason? Depends on direction.  Assuming counter-clockwise assembly:</p>
-    <ul>
-        <li><strong>UP &nbsp;&nbsp;:</strong> x: -(previous LEFT box's 'x' value), y: -(width + previous LEFT box's 'y' value) </li>
-        <li><strong>LEFT :</strong> x: -(width + previous LEFT box's 'x' value) , y: previous UP box's 'y' value </li>
-        <li><strong>DOWN :</strong> x: previous LEFT box's 'x' value , y: previous LEFT box's 'y' value + previous LEFT box's 'height'. NOTE: the 1st element is a DOWN square that breaks the rule.  It's coords are 0,0, dimensions: 1x1.</li>
-        <li><strong>RIGHT:</strong> x: previous DOWN box's 'x' value + previous DOWN box's width , y: previous LEFT box's 'y' value</li>
-    </ul>
+    <p>The x and y coordinates are funky. What's the relationship? Assuming counter-clockwise assembly: <br />
+    Xn = Math.abs(Yn-1) <br />
+    Yn = -((Wn-2) + (Yn-2)) ... 'W' = "Width"</p>
+    
     
     <p>Fibonacci sequence:</p>    
     <pre>{{ generateSeries(19) }}</pre>
     
-    <svg id="fibonacci" width="95%" viewbox="-150 -150 400 300" xmlns="http://www.w3.org/2000/svg">
+    <svg id="fibonacci" width="95%" viewbox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+        
+        <line class="grid" x1="-500" y1="0" x2="500" y2="0"/>
+        <line class="grid" x1="0" y1="-500" x2="0" y2="500"/>
 
         <rect transform="rotate(90)"  x="0"     y="-1"    width="1"    height="1"   />   <!-- down -->
         <rect transform="rotate(0)"   x="1"     y="0"     width="1"    height="1"   />   <!-- right  -->
@@ -38,16 +38,15 @@
         <rect transform="rotate(90)"  x="6"     y="-10"   width="34"   height="34"  />   <!-- down -->
         <rect transform="rotate(0)"   x="10"    y="-15"   width="55"   height="55"  />   <!-- right -->
         <rect transform="rotate(270)" x="15"    y="-24"   width="89"   height="89"  />   <!-- up -->
-        <rect transform="rotate(180)" x="24"   y="-40"   width="144"   height="144" />   <!-- left -->
+        <rect transform="rotate(180)" x="24"    y="-40"   width="144"  height="144" />   <!-- left -->
+        <rect transform="rotate(90)"  x="40"    y="-65"   width="233"  height="233" />   <!-- down -->
+        <rect transform="rotate(0)"   x="65"    y="-104"  width="377"  height="377" />   <!-- right -->
+        <rect transform="rotate(270)" x="104"   y="-168"  width="610"  height="610"  />   <!-- up -->
+        <rect transform="rotate(180)" x="168"    y="-273"   width="987"  height="987" />   <!-- left -->
+        <rect transform="rotate(90)"  x="273"    y="-442"   width="1597"  height="1597" />   <!-- down -->
+        <rect transform="rotate(0)"   x="442"    y="-714"  width="2584"  height="2584" />   <!-- right -->
 
     </svg>
-
-<p>
-        
-        
-        <rect transform="rotate(90)"  x="55"  y="-89"   width="233"   height="233" />   <!-- down -->
-        <rect transform="rotate(0)"   x="89"  y="-89"   width="377"   height="377" />   <!-- right -->
-</p>
 
 </body>
 

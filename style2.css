@@ -3,20 +3,25 @@
     stroke-width: 0;
 }
 
+#fibonacci > line.grid {
+    stroke: black;
+    stroke-width: 0.25;
+}
+
 #fibonacci > rect:nth-child(4n + 1) {
-    fill: #ff4444;
+    fill: rgba(255, 68, 68, 0.5);
 }
 
 #fibonacci > rect:nth-child(4n + 2) {
-    fill: #44bb44;
+    fill: rgba(68, 187, 68, 0.5);
 }
 
 #fibonacci > rect:nth-child(4n + 3) {
-    fill: #4444bb;
+    fill: rgba(68, 68, 187, 0.5);
 }
 
 #fibonacci > rect:nth-child(4n + 4) {
-    fill: #ffa500;
+    fill: rgba(255, 165, 0, 0.5);
 }
 
 li, pre {
