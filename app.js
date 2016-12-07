@@ -49,18 +49,18 @@
             function link(scope, element, attrs) {
                 
                 var ns = 'http://www.w3.org/2000/svg',
-                    svgElem = angular.element(document.getElementById('fibonacci'));
+                    
+                    // capture main <svg> element
+                    svgElem = angular.element(document.getElementById('fibonacci')),
+                    
+                    // cache array of rgba() fill colors
+                    fillColorArray = genFillColorArray(35);
                 
                 
                 // MAIN RENDER RUNCTION
                 function render() {
-                    
-                    // empty svgElem before each rebuild
-                    svgElem.empty();
-                    
-                    // rebuild and append child nodes
-                    elementBuilder(scope.iterations);
-                    
+                    svgElem.empty();   // empty <svg> before each rebuild
+                    elementBuilder(scope.iterations);    // rebuild <svg>
                 }
                 
                 
@@ -110,23 +110,20 @@
                 */
                 function elementBuilder(iterations) {
                     var squaresArray = generateSquaresArray(iterations),
-                        rectElem,
-                        group,
-                        pathElem,
-                        fillColor,
-                        dAttr;
+                        rectElem,      // placeholder for <rect> elems
+                        group,         // placeholder for <g> elems
+                        pathElem,      // placeholder for <path> elems
+                        dAttr;         // placeholder for <path> 'd' attr
 
                     // iterate over squaresArray
-                    squaresArray.forEach(function (element) {
-                        
-                        fillColor = genFillColor();
+                    squaresArray.forEach(function (element, index) {
                         
                         // create <g>roup element
                         group = angular.element(document.createElementNS(ns, 'g'));
 
                         // create <rect> element & add attributes from squaresArray
                         rectElem = angular.element(document.createElementNS(ns, 'rect'))
-                            .attr('fill', fillColor)
+                            .attr('fill', fillColorArray[index])
                             .attr('x', element[0])
                             .attr('y', element[1])
                             .attr('width', element[2])
@@ -162,8 +159,8 @@
                 
                 /* FILL COLOR RANDOMIZER
                  *
-                 * @params      [none]
-                 * @returns     [rgba color]
+                 * @params    [none]
+                 * @returns   [string]   [rgba color string]
                 */
                 function genFillColor() {
                     var r = Math.floor(Math.random() * 256),
@@ -172,6 +169,23 @@
                         a = Math.floor(Math.random() * 100) / 100;
                     
                     return 'rgba(' + [r, g, b, a].join() + ')';
+                    
+                }
+                
+                /* RANDOM FILL COLOR ARRAY GENERATOR
+                 *
+                 * @params    [number]   n   [number of iterations]
+                 * @returns   [array]        [array of rgba color strings]
+                */
+                function genFillColorArray(n) {
+                    var fillColorArray = [],
+                        i;
+                    
+                    for (i = 0; i < 35; i += 1) {
+                        fillColorArray.push(genFillColor());
+                    }
+                    
+                    return fillColorArray;
                     
                 }
                 
