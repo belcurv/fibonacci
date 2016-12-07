@@ -14,11 +14,13 @@
 <body ng-app="fibapp" ng-controller="fibController">
     
      <div class="container">
-         <p>Each rect's width and height are always the same and must be positive numbers. This series of squares uses 'transform: rotate(deg)' CSS styling to position each square.</p>
+         <p>Each svg <span class="code">&ltrect&gt</span> element's width and height are always the same and must be positive numbers. The positioning x,y coordinates can be negative. Wrapping the <span class="code">&ltrect&gt</span> and <span class="code">&ltpath&gt</span> elements in a <span class="code">&ltg&gt</span>roup allows for easy rotate transforms. For example: <span class="code">transform: rotate(90deg)</span>.</p>
          
-         <p>The x and y coordinates are funky. What's the relationship? Assuming counter-clockwise assembly: <br />
-             X<sub>n</sub> = Math.abs(Y<sub>n-1</sub>) <br />
-             Y<sub>n</sub> = -( (W<sub>n-2</sub>) + (Y<sub>n-2</sub>) ) ... (<em>where 'W' = "Width")</em></p>
+         <p>The x and y positioning coordinates are funky. What's the relationship? Assuming counter-clockwise assembly:
+             <br />
+             <span class="code">X<sub>n</sub> = Math.abs(Y<sub>n-1</sub>)</span>
+             <br />
+             <span class="code">Y<sub>n</sub> = -( Width<sub>n-2</sub> + Y<sub>n-2</sub> )</span> <em></p>
          
          <form>
              <label for="inputIterations">Iterations</label>
