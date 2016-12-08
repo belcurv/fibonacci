@@ -14,6 +14,8 @@ body {
     stroke-width: 0.5;
 }
 
+/* Because IE doesn't understand CSS transforms, we can't use the following */
+/*
 #fibonacci > g:nth-child(4n + 1) {
     transform: rotate(90deg);
 }
@@ -29,6 +31,7 @@ body {
 #fibonacci > g:nth-child(4n + 4) {
     transform: rotate(180deg);
 }
+*/
 
 .container {
     position: fixed;

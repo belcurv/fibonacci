@@ -79,15 +79,17 @@
                     
                     var series = fibFactory.generateSeries(iterations),
                         results = [
-                            [0, -1, 1],
-                            [1, 0, 1]
+                            // [x, y, width, angle]
+                            [0, -1, 1, 90],
+                            [1, 0, 1, 0]
                         ],
                         i,
                         Xn,
-                        Yn;
+                        Yn,
+                        rotationAngle = 270;
 
                     for (i = 2; i < series.length - 1; i += 1) {
-
+                        
                         // Xn = Math.abs(Yn-1)
                         Xn = Math.abs(results[(i - 1)][1]);
                         
@@ -95,7 +97,16 @@
                         Yn = -((results[(i - 2)][2]) - Math.abs((results[(i - 2)][1])));
                         
                         // push new <rect> attrs to results array
-                        results.push([Xn, Yn, series[i + 1]]);
+                        results.push([Xn, Yn, series[i + 1], rotationAngle]);
+                        
+                        // Because IE doesn't fully understand SVG CSS transforms,
+                        // we have to calculate rotational angle and add it to our
+                        // squares array.  The following just rotates by -90 degrees.
+                        if (rotationAngle === 0) {
+                            rotationAngle = 270
+                        } else {
+                            rotationAngle = rotationAngle - 90;
+                        }
                     }
 
                     return results;
@@ -114,6 +125,7 @@
                         group,         // placeholder for <g> elems
                         pathElem,      // placeholder for <path> elems
                         dAttr;         // placeholder for <path> 'd' attr
+                        
 
                     // iterate over squaresArray
                     squaresArray.forEach(function (element, index) {
@@ -145,6 +157,7 @@
                         
                         // append <rect> and <path> to <g>roup
                         group
+                            .attr('transform', 'rotate(' + element[3] + ')')
                             .append(rectElem)
                             .append(pathElem);
 
