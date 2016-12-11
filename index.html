@@ -14,9 +14,9 @@
 <body ng-app="fibapp" ng-controller="fibController">
     
      <div class="container">
-         <p>Fibonacci's series is a <em>recurrence relation</em> where by Value<sub>n</sub> = Value<sub>n-1</sub> + Value<sub>n-2</sub>.  Each iteration generates a square (<span class="code">&ltrect&gt</span> element) with hiehgt/width of Value<sub>n</sub>, plus a curve (<span class="code">&ltpath&gt</span> element) with radius Value<sub>n</sub>.</p>
+         <p>Fibonacci's series is a <em>recurrence relation</em> where by Value<sub>n</sub> = Value<sub>n-1</sub> + Value<sub>n-2</sub>.  Each iteration generates a square (<span class="code">&ltrect&gt</span> element) with hieght & width of Value<sub>n</sub>, plus a curve (<span class="code">&ltpath&gt</span> element) with radius Value<sub>n</sub>.</p>
          
-         <p>Wrapping each iteration's <span class="code">&ltrect&gt</span> and <span class="code">&ltpath&gt</span> elements in a <span class="code">&ltg&gt</span>roup allows us to rotate both elements at the same time.  This might normally be done in CSS (for example: <span class="code">transform: rotate(90deg) </span>), but IE10 doesn't obey so a different technique was used: adding <em>inline SVG</em> transform attributes when the <span class="code">&ltg&gt</span>roups are created by the directive logic.</p>
+         <p>Wrapping each iteration's <span class="code">&ltrect&gt</span> and <span class="code">&ltpath&gt</span> in a <span class="code">&ltg&gt</span>roup allows us to rotate both elements at the same time.  This might normally be done in CSS, but IE10 doesn't obey so a different technique was used: adding <em>inline SVG</em> transform attributes as each <span class="code">&ltg&gt</span>roup is created in the directive's <span class="code">link</span> function</p>
          
          <p>Because we're rotating with each iteration, <span class="code">&ltg&gt</span>roup X and Y starting coordinates are relatively easy to calculate. X<sub>n</sub> and Y<sub>n</sub> depend on attributes of their siblings:
              <br />
