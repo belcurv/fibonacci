@@ -14,24 +14,37 @@
 <body ng-app="fibapp" ng-controller="fibController">
     
      <div class="container">
-         <p>Each svg <span class="code">&ltrect&gt</span> element's width and height are always the same and must be positive numbers. The positioning x,y coordinates can be negative. Wrapping the <span class="code">&ltrect&gt</span> and <span class="code">&ltpath&gt</span> elements in a <span class="code">&ltg&gt</span>roup allows for easy rotate transforms. For example: <span class="code">transform: rotate(90deg)</span>.</p>
+         <p>Fibonacci's series is a <em>recurrence relation</em> where by Value<sub>n</sub> = Value<sub>n-1</sub> + Value<sub>n-2</sub>.  Each iteration generates a square (<span class="code">&ltrect&gt</span> element) with hiehgt/width of Value<sub>n</sub>, plus a curve (<span class="code">&ltpath&gt</span> element) with radius Value<sub>n</sub>.</p>
          
-         <p>The x and y positioning coordinates are funky. What's the relationship? Assuming counter-clockwise assembly:
+         <p>Wrapping each iteration's <span class="code">&ltrect&gt</span> and <span class="code">&ltpath&gt</span> elements in a <span class="code">&ltg&gt</span>roup allows us to rotate both elements at the same time.  This might normally be done in CSS (for example: <span class="code">transform: rotate(90deg) </span>), but IE10 doesn't obey so a different technique was used: adding <em>inline SVG</em> transform attributes when the <span class="code">&ltg&gt</span>roups are created by the directive logic.</p>
+         
+         <p>Because we're rotating with each iteration, <span class="code">&ltg&gt</span>roup X and Y starting coordinates are relatively easy to calculate. X<sub>n</sub> and Y<sub>n</sub> depend on attributes of their siblings:
              <br />
-             <span class="code">X<sub>n</sub> = Math.abs(Y<sub>n-1</sub>)</span>
+             <span class="code">X<sub>n</sub> = +( Y<sub>n-1</sub> )</span>
              <br />
              <span class="code">Y<sub>n</sub> = -( Width<sub>n-2</sub> + Y<sub>n-2</sub> )</span></p>
          
          <form>
-             <label for="inputIterations">Iterations</label>
-             <input id="inputIterations" type="number" min="2" max="35" step="1" ng-model="iterations"></input>
+             <input id="inputIterations" type="range" min="2" max="35" step="1" ng-model="iterations"></input>
+             <label for="inputIterations">
+                 {{iterations}} iterations
+             </label>
          </form>
-    
-     <p>Resulting Fibonacci series: <br />
-         {{ series(iterations) | json }}</p>
+         
+         <p>Resulting Fibonacci series: <br /> {{ series(iterations) | json }}</p>
+         
+         <form>
+             <label for="showHideSquares">Show squares:</label>
+             <input id="showHideSquares" type="checkbox" ng-model="showHide" /> 
+         </form>
+      
     </div>
     
-    <fibonacci iterations="iterations"></fibonacci>
+    <svg id="fibonacci"
+        fibonacci iterations="iterations" show="showHide"
+        width="100%" viewBox="-200 -400 1200 800"
+        xmlns="http://www.w3.org/2000/svg">
+    </svg>
 
 </body>
 

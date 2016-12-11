@@ -40,6 +40,7 @@
 
             $scope.iterations = 19;
             $scope.series = fibFactory.generateSeries;
+            $scope.showHide = true;
             
         }])
 
@@ -50,22 +51,19 @@
                 
                 var ns = 'http://www.w3.org/2000/svg',
                     
-                    // capture main <svg> element
-                    svgElem = angular.element(document.getElementById('fibonacci')),
-                    
                     // cache array of rgba() fill colors
                     fillColorArray = genFillColorArray(35);
                 
                 
                 // MAIN RENDER RUNCTION
                 function render() {
-                    svgElem.empty();   // empty <svg> before each rebuild
+                    element.empty();   // empty <svg> before each rebuild
                     elementBuilder(scope.iterations);    // rebuild <svg>
                 }
                 
                 
                 // watch scope.iterations for changes and re-render fibonacci flower
-                scope.$watch('iterations', function () {
+                scope.$watchGroup(['iterations', 'show'], function () {
                     render();
                 });
                 
@@ -103,7 +101,7 @@
                         // we have to calculate rotational angle and add it to our
                         // squares array.  The following just rotates by -90 degrees.
                         if (rotationAngle === 0) {
-                            rotationAngle = 270
+                            rotationAngle = 270;
                         } else {
                             rotationAngle = rotationAngle - 90;
                         }
@@ -128,7 +126,7 @@
                         
 
                     // iterate over squaresArray
-                    squaresArray.forEach(function (element, index) {
+                    squaresArray.forEach(function (sq, index) {
                         
                         // create <g>roup element
                         group = angular.element(document.createElementNS(ns, 'g'));
@@ -136,17 +134,21 @@
                         // create <rect> element & add attributes from squaresArray
                         rectElem = angular.element(document.createElementNS(ns, 'rect'))
                             .attr('fill', fillColorArray[index])
-                            .attr('x', element[0])
-                            .attr('y', element[1])
-                            .attr('width', element[2])
-                            .attr('height', element[2]);   // these are squares! ... width = height 
+                            .attr('x', sq[0])
+                            .attr('y', sq[1])
+                            .attr('width', sq[2])
+                            .attr('height', sq[2]);   // these are squares! ... width = height
+                        
+                        if (scope.show === false) {
+                            rectElem.addClass('ng-hide');
+                        }
                         
                         // create <path> element
                         pathElem = angular.element(document.createElementNS(ns, 'path'));
                         
                         // assemble <path> 'd' attribute
                         // A rx,ry xAxisRotate LargeArcFlag,SweepFlag x,y"
-                        dAttr = 'M' + element[0] + ',' + (element[1] + element[2]) + ' A' + element[2] + ',' + element[2] + ', 0, 0, 0, ' + (element[0] + element[2]) + ',' + element[1];
+                        dAttr = 'M' + sq[0] + ',' + (sq[1] + sq[2]) + ' A' + sq[2] + ',' + sq[2] + ', 0, 0, 0, ' + (sq[0] + sq[2]) + ',' + sq[1];
                         
                         // add attrs to <path>
                         pathElem
@@ -157,12 +159,12 @@
                         
                         // append <rect> and <path> to <g>roup
                         group
-                            .attr('transform', 'rotate(' + element[3] + ')')
+                            .attr('transform', 'rotate(' + sq[3] + ')')
                             .append(rectElem)
                             .append(pathElem);
 
                         // append <rect> to main <svg> element
-                        svgElem
+                        element
                             .append(group);
                     
                     });
@@ -209,9 +211,9 @@
             return {
                 restrict: 'AE',
                 scope: {
-                    iterations: '='
+                    iterations: '=',
+                    show: '='
                 },
-                template: '<svg id="fibonacci" width="100%" viewbox="-200 -400 1200 800" xmlns="http://www.w3.org/2000/svg"></svg>',
                 link: link
             };
 
