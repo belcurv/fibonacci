@@ -1,3 +1,6 @@
+/*jslint */
+/*global angular */
+
 (function () {
     'use strict';
 
